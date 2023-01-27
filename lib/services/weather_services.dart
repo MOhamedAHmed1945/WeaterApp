@@ -22,7 +22,7 @@ class WeatherServices{
         minTemp: jsonData['mintemp_c'],
         weatherStateName: jsonData['condition']['text'],
     );
-      return weatherVar;
+      return weatherVar;////////////
   }
 }
 /*
