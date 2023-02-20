@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/screens/home_page.dart';
+import 'package:provider/provider.dart';
+import 'package:weather_app/providers/weather_providers.dart';
+import 'package:weather_app/screens/home_screen.dart';
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+      create: (context){
+        return WeatherProvider();
+      },
+      child: const MyApp())
+  );
 }
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -12,9 +19,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Weather App',
       theme: ThemeData(
-      primarySwatch: Colors.blue,
+      primarySwatch: Provider.of<WeatherProvider>(context).
+      weatherData == null ? Colors.red : Provider.of<WeatherProvider>(context).
+      weatherData!.getThemeColor(),
+        //brightness:Brightness.light or Brightness.dark
       ),
-      home:  HomePage(),
+      home:  HomeScreen(),
     );
   }
 }
