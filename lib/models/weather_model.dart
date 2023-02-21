@@ -1,13 +1,12 @@
 
-//import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class WeatherModel{
-  String? date;
+  DateTime? date;
   double? temp;
   double? maxTemp;
   double? minTemp;
+  //Image? imageWeather;
   String? weatherStateName;
 
   WeatherModel({
@@ -15,23 +14,22 @@ class WeatherModel{
    required this.temp,
    required this.maxTemp,
    required this.minTemp,
+   //required this.imageWeather,
    required this.weatherStateName,
   });
  factory WeatherModel.fromJson(dynamic data)
  {
    var jsonData = data['forecast']['forecastday'][0]['day'];
    return WeatherModel(
-       date: data['location']['localtime'],
+       //date: data['location']['localtime'],
+       date: DateTime.parse(data['location']['localtime']),
        temp: jsonData['avgtemp_c'],
        maxTemp: jsonData['maxtemp_c'],
        minTemp: jsonData['mintemp_c'],
+      // imageWeather:jsonData['condition']['icon'],
        weatherStateName: jsonData['condition']['text'],
    );
  }
- /*@override
-  String toString() {
-    return 'tem = $temp minTemp = $maxTemp date = $date';
-  }*/
 String? getImage(){
   if(weatherStateName == 'Clear' ||
       weatherStateName == 'Light Cloud'||
@@ -47,7 +45,8 @@ String? getImage(){
     return 'lib/assets/images/snow.png';
   }
   else if(weatherStateName == 'Heavy Cloud'||
-      weatherStateName == 'Partly cloudy')
+      weatherStateName == 'Partly cloudy'||
+      weatherStateName == 'Cloudy')
   {
     return 'lib/assets/images/cloudy.png';
   }

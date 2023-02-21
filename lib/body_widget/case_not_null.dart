@@ -36,7 +36,10 @@ class CaseNotNull extends StatelessWidget {
             ),
           ),
           Text(
-            'Updated at',
+            //weatherData!.date!.toString()
+            'Updated at : ${
+                DateTime.now().hour.toString()
+            }:${ DateTime.now().minute.toString()}',
             style: TextStyle(
               fontSize: 24,
             ),
@@ -46,8 +49,11 @@ class CaseNotNull extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Image.asset(weatherData!.getImage().toString()),
+              //Image.asset(weatherData!.getImage().toString())),
+              //weatherData!.imageWeather!,
+              //Image.network(weatherData!.imageWeather),
               Text(
-                weatherData!.temp.toString(),
+                weatherData!.temp!.toInt().toString(),
                 style: TextStyle(
                   fontSize: 34,
                   fontWeight: FontWeight.bold,
